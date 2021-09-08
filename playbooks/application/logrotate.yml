@@ -1,0 +1,26 @@
+#!/usr/bin/env ansible-playbook
+---
+
+- name: Install logrotate
+  hosts: application
+  become: yes
+  tasks:
+   - name: Install logrotate
+     apt:
+       package: logrotate
+       state: present
+   
+   - name:  Copy configs
+     template: src='{{item.src}}' dest='{{item.dest}}'
+     with_items:
+        - { src: 'templates/logrotate/nginx.j2', dest: '/etc/logrotate.d/nginx'}
+        - { src: 'templates/logrotate/mongodb.j2', dest: '/etc/logrotate.d/mongodb'}
+        - { src: 'templates/logrotate/mysql.j2', dest: '/etc/logrotate.d/mysql'}
+        - { src: 'templates/logrotate/docker-container.j2', dest: '/etc/logrotate.d/docker-container'}
+
+   - name: restart logrotate
+     systemd:
+       name: logrotate
+       state: restarted
+       enabled: yes
+...

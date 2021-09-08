@@ -1,0 +1,9 @@
+---
+
+collections:
+ - name: community.general
+ - name: devsec.hardening
+ - name: ansible.posix
+roles:
+ - name: manala.locales
+ - name: geerlingguy.docker

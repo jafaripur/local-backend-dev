@@ -1,0 +1,5 @@
+{{ ansible_managed | comment }}
+
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H fd:// -H {{docker_listen}}

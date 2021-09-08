@@ -1,0 +1,5 @@
+.project
+.vault_password
+
+inventory/host_vars/araz/vault.yml
+

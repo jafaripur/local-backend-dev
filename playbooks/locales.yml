@@ -1,0 +1,12 @@
+#!/usr/bin/env ansible-playbook
+---
+- name: Config locales for UTF-8
+  hosts: locales
+  become: yes
+  roles:
+    - manala.locales
+  vars:
+    manala_locales_codes_default: en_US.UTF-8
+    manala_locales_codes:
+      - en_US.UTF-8
+...

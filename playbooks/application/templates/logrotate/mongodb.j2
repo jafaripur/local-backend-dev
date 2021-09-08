@@ -1,0 +1,11 @@
+{{docker_files_path}}/mongodb/data/log/*.log {
+    su root adm
+    daily
+    rotate 31
+    missingok
+    notifempty
+    sharedscripts
+    compress
+    delaycompress
+    copytruncate
+}

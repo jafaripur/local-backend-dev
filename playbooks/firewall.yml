@@ -1,0 +1,90 @@
+#!/usr/bin/env ansible-playbook
+---
+- name: "Configure ufw"
+  hosts: firewall
+  become: yes
+  tasks:
+   - name: "Install ufw"
+     apt:
+       package: ufw
+       state: present
+   
+   - name: "Reset ufw"
+     ufw: state=reset
+     notify:
+     - restart ufw
+     
+   - name: "Disable ufw"
+     ufw:
+       state: disabled
+
+   - name: "Configure ufw policy"
+     ufw: '{{item}}'
+     with_items: '{{ufw_rules | default([])}}'
+     notify:
+     - restart ufw
+
+   - name: Configure ufw to work with DOCKER-USER chain name in ipv4
+     blockinfile:
+       path: /etc/ufw/after.rules
+       marker: "# {mark} ANSIBLE MANAGED BLOCK (docker-user)"
+       block: |
+         *filter
+         :ufw-user-forward - [0:0]
+         :DOCKER-USER - [0:0]
+         
+         -A DOCKER-USER -j RETURN -s 172.17.0.0/12
+         -A DOCKER-USER -j RETURN -s 172.18.0.0/12
+         
+         -A DOCKER-USER -p udp -m udp --sport 53 --dport 1024:65535 -j RETURN
+         
+         -A DOCKER-USER -j ufw-user-forward
+         
+         -A DOCKER-USER -j DROP -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -d 172.17.0.0/12
+         -A DOCKER-USER -j DROP -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -d 172.18.0.0/12
+         
+         -A DOCKER-USER -j DROP -p udp -m udp --dport 0:32767 -d 172.17.0.0/12
+         -A DOCKER-USER -j DROP -p udp -m udp --dport 0:32767 -d 172.18.0.0/12
+         
+         -A DOCKER-USER -j RETURN
+         
+         COMMIT
+     notify:
+      - restart ufw
+
+   - name: Configure ufw to work with DOCKER-USER chain name in ipv6
+     blockinfile:
+       path: /etc/ufw/after6.rules
+       marker: "# {mark} ANSIBLE MANAGED BLOCK (docker-user)"
+       block: |
+         *filter
+         :ufw6-user-forward - [0:0]
+         :DOCKER-USER - [0:0]
+         
+         -A DOCKER-USER -j RETURN -s fe80::/7
+         
+         -A DOCKER-USER -p udp -m udp --sport 53 --dport 1024:65535 -j RETURN
+         
+         -A DOCKER-USER -j ufw6-user-forward
+         
+         -A DOCKER-USER -j DROP -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -d fe80::/7
+         -A DOCKER-USER -j DROP -p udp -m udp --dport 0:32767 -d fe80::/7
+         
+         -A DOCKER-USER -j RETURN
+         
+         COMMIT
+     notify:
+      - restart ufw
+       
+   - name: "Enable ufw"
+     ufw: state=enabled logging=on
+     notify:
+      - restart ufw
+     
+  handlers:
+    - name: restart ufw
+      systemd:
+        name: ufw
+        state: restarted
+        enabled: yes
+...

@@ -1,0 +1,14 @@
+{{docker_files_path}}/mysql/data/log/*.log {
+    su root adm
+    daily
+    rotate 31
+    missingok
+    notifempty
+    sharedscripts
+    compress
+    delaycompress
+    copytruncate
+    postrotate
+	  chown 999:999 {{docker_files_path}}/mysql/data/log/
+	endscript
+}

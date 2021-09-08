@@ -1,0 +1,25 @@
+#!/bin/sh
+  
+if [ "$1" = "update" ]; then
+    docker run --rm --interactive --tty \
+	  -v $HOME/.composer:/tmp \
+	  -v $PWD:/app \
+	  -u $(id -u ${USER}):$(id -g ${USER}) \
+	  composer update --ignore-platform-reqs --no-scripts && \
+	  composer dump-autoload --optimize && \
+	  composer dump-autoload --classmap-authoritative
+elif [ "$1" = "install" ]; then
+	docker run --rm --interactive --tty \
+	  -v $HOME/.composer:/tmp \
+	  -v $PWD:/app \
+	  -u $(id -u ${USER}):$(id -g ${USER}) \
+	  composer install --ignore-platform-reqs --no-scripts && \
+	  composer dump-autoload --optimize && \
+	  composer dump-autoload --classmap-authoritative
+else
+    docker run --rm --interactive --tty \
+	  -v $HOME/.composer:/tmp \
+	  -v $PWD:/app \
+	  -u $(id -u ${USER}):$(id -g ${USER}) \
+	  composer "$@"
+fi

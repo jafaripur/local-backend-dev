@@ -1,0 +1,4 @@
+---
+
+vault_mysql_root_password: '123456'
+vault_redis_password: '123456'

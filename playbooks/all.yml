@@ -1,0 +1,30 @@
+#!/usr/bin/env ansible-playbook
+---
+- name: Locales
+  import_playbook: locales.yml
+
+- name: Hostname
+  import_playbook: hostname.yml
+
+- name: software
+  import_playbook: software.yml
+
+- name: System configuration
+  import_playbook: system-configuration.yml
+
+- name: Time
+  import_playbook: time.yml
+
+- name: Install and Config Firewall
+  import_playbook: firewall.yml
+
+- name: Hardening SSH & OS
+  import_playbook: hardening.yml
+
+- name: Install Docker
+  import_playbook: docker.yml
+  
+- name: Disable Transparent Huge Pages (THP)
+  import_playbook: thp.yml
+  
+...

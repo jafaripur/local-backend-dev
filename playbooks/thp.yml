@@ -1,0 +1,24 @@
+#!/usr/bin/env ansible-playbook
+---
+- name: Disable transparent hugepages
+  hosts: thp
+  become: yes
+  tasks:
+   - name: Create disable transparent hugepages systemd service file
+     template:
+       src: disable-transparent-hugepages.service.j2
+       dest: /etc/systemd/system/disable-transparent-hugepages.service
+       owner: root
+       group: root
+       mode: 0644
+       force: yes
+     notify: "run disable-transparent-hugepages"
+              
+  handlers:
+    - name: run disable-transparent-hugepages
+      systemd:
+        name: disable-transparent-hugepages
+        enabled: true
+        state: started
+        daemon_reload: yes
+...

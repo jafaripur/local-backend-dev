@@ -1,0 +1,42 @@
+#!/usr/bin/env ansible-playbook
+---
+- name: Install chrony on servers
+  hosts: time
+  become: yes
+  tasks:
+    - name: "Remove ntp"
+      apt:
+        name: ntp
+        state: absent
+    - name: "Ensure chrony (for time synchronization) is installed"
+      apt:
+        name: chrony
+        state: present
+        
+    - name: "Configure chrony"
+      lineinfile:
+        path: /etc/chrony/chrony.conf
+        line: 'allow 127/8'
+       
+    - name: "Restart chrony"
+      service:
+        name: chronyd
+        state: restarted
+        
+    - name: Set timezone
+      copy:
+        content: '{{ timezone | default("UTC") }}'
+        dest: /etc/timezone
+        owner: root
+        group: root
+        mode: 0644
+   
+    - name: Remove existing localtime configuration file
+      file: path=/etc/localtime state=absent
+    
+    - name: Set localtime to UTC
+      file: src=/usr/share/zoneinfo/{{ timezone | default("UTC") }} dest=/etc/localtime state=link owner=root group=root mode=0644
+    
+    - name: Reconfigure tzdata
+      command: dpkg-reconfigure -f noninteractive tzdata
+...

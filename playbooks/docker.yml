@@ -1,0 +1,92 @@
+#!/usr/bin/env ansible-playbook
+---
+- name: Install Docker
+  hosts: docker
+  become: yes
+  tasks:
+    - name: Install
+      include_role:
+        name: geerlingguy.docker
+      vars:
+        docker_users:
+          - "{{docker_user}}"
+        docker_install_compose: false
+        docker_edition: 'ce'
+        #docker_daemon_options:
+        #  iptables: false
+        #docker_daemon_options:
+        #  hosts:
+        #    - "{{docker_listen}}"
+        #  storage-driver: "devicemapper"
+        #  log-opts:
+        #    max-size: "100m"
+
+    - name: Create override folder of docker services
+      file:
+        path: /etc/systemd/system/docker.service.d
+        state: directory
+        owner: root
+        group: root
+
+    - name: Config listen
+      template:
+        src: docker.service.conf.j2
+        dest: /etc/systemd/system/docker.service.d/override.conf
+        owner: root
+        group: root
+        mode: 0644
+        force: yes
+      notify:
+       - restart docker
+
+    #- name: "Create user dockermap"
+    #  user:
+    #    name: "dockermap"
+
+    #- name: Config Subuid
+    #  lineinfile:
+    #    path: /etc/subuid
+    #    line: 'dockremap:400000:65536'
+    #    create: yes
+    #    state: present
+
+    #- name: Config Subgid
+    #  lineinfile:
+    #    path: /etc/subgid
+    #    line: 'dockremap:400000:65536'
+    #    create: yes
+    #    state: present
+
+    - name: Config CGroup enable memory
+      replace:
+        path: /etc/default/grub
+        regexp: '^(GRUB_CMDLINE_LINUX=(?:(?![" ]{{ option | regex_escape }}=).)*)(?:[" ]{{ option | regex_escape }}=\S+)?(.*")$'
+        replace: '\1 {{ option }}={{ value }}\2'
+      vars:
+        option: cgroup_enable
+        value: memory
+      notify:
+       - update grub
+
+    - name: Config CGroup enable swap
+      replace:
+        path: /etc/default/grub
+        regexp: '^(GRUB_CMDLINE_LINUX=(?:(?![" ]{{ option | regex_escape }}=).)*)(?:[" ]{{ option | regex_escape }}=\S+)?(.*")$'
+        replace: '\1 {{ option }}={{ value }}\2'
+      vars:
+        option: swapaccount
+        value: 1
+      notify:
+       - update grub
+
+  handlers:
+    - name: restart docker
+      systemd:
+        name: ufw
+        daemon_reload: yes
+        state: restarted
+
+    - name: update grub
+      command: 'update-grub'
+
+...

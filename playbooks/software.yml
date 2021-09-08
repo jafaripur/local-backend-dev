@@ -1,0 +1,16 @@
+#!/usr/bin/env ansible-playbook
+---
+- name: Install needed software
+  hosts: software
+  become: yes
+  tasks:
+    - name: "Install vim"
+      apt:
+        package: vim
+        state: present
+
+    - name: "Install GIT"
+      apt:
+        package: vim
+        state: present
+...

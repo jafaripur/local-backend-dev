@@ -1,0 +1,18 @@
+#!/usr/bin/env ansible-playbook
+---
+
+- name: 'Playbook for change the hostname'
+  hosts: hostname
+  become: yes
+  tasks:
+    - name: "Update Hostnames to {{system_hostname}}"
+      hostname:
+        name: "{{ system_hostname }}"
+    - name: 'Add hostname {{system_hostname}} to /etc/hosts'
+      lineinfile:
+        path: /etc/hosts
+        regexp: '^127\.0\.0\.1[ \t]+localhost'
+        line: '127.0.0.1 localhost {{ system_hostname }}'
+        state: present
+        
+...
