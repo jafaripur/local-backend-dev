@@ -29,7 +29,7 @@ Create vault file with secret and change configuration:
 ```
 openssl rand -base64 50 > .vault_password
 
-cp inventory/host_vars/araz/vault_sample.yml inventory/host_vars/araz/vault.yml
+cp inventory/host_vars/araz/vault.sample inventory/host_vars/araz/vault.yml
 
 cat inventory/host_vars/araz/vault.yml  #Change content of vault file.
 
