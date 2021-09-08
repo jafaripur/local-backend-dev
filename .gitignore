@@ -2,4 +2,5 @@
 .vault_password
 
 inventory/host_vars/araz/vault.yml
+playbooks/application/templates/docker/mongodb/config/keyfile
 
