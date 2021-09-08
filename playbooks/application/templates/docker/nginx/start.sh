@@ -6,6 +6,7 @@ docker run -it -d \
            --network {{docker_network_internal}} \
            -v {{php_project_path}}:/var/www/html:ro \
            -v {{docker_files_path}}/nginx/conf.d:/etc/nginx/conf.d:ro \
+           -v {{docker_files_path}}/nginx/snippets:/etc/nginx/snippets:ro \
            -v {{docker_files_path}}/nginx/h5bp:/etc/nginx/h5bp:ro \
            -v {{docker_files_path}}/nginx/runtime/logs:/var/log/nginx \
            -v {{docker_files_path}}/nginx/runtime/caches:/var/cache/nginx \
