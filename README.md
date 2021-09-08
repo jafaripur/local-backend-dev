@@ -43,9 +43,7 @@ ansible-vault encrypt inventory/host_vars/araz/vault.yml
 
 ### MongoDB KeyFile
 
-For replica in mongodb create key file:
-
-Create vault file with secret and change configuration:
+For replica in mongodb create key file.
 
 ```
 openssl rand -base64 756 > playbooks/application/templates/docker/mongodb/config/keyfile
