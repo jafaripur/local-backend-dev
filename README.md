@@ -41,6 +41,19 @@ cat inventory/host_vars/araz/vault.yml  #Change content of vault file.
 ansible-vault encrypt inventory/host_vars/araz/vault.yml
 ```
 
+### MongoDB KeyFile
+
+For replica in mongodb create key file:
+
+Create vault file with secret and change configuration:
+
+```
+openssl rand -base64 756 > playbooks/application/templates/docker/mongodb/config/keyfile
+
+ansible-vault encrypt playbooks/application/templates/docker/mongodb/config/keyfile
+
+```
+
 ## Configuration
 
 Configuration available in `inventory/host_vars/araz/vars.yml`, Can change as need.
