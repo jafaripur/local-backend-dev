@@ -62,6 +62,8 @@ ansible-playbook playbooks/application/docker.yml -K  # This can be run several 
 ansible-playbook playbooks/application/logrotate.yml -K # This is for logrotate
 ```
 
+Docker file available in this variable path `application_working_path` which is defined in host var file.
+
 For PHP-CLI and composer alias defined:
 
 ```
