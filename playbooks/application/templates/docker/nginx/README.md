@@ -32,7 +32,7 @@ location ^~ /crow/backend/web {
 	error_log /var/log/nginx/crow-backend-error.log warn;
 	access_log /var/log/nginx/crow-backend-access.log main if=$loggable;
 	
-    try_files $uri $uri/ /crow/backend/web/index.php;
+    try_files $uri $uri/ /crow/backend/web/index.php$is_args$args;
     include snippets/php-fpm.conf;
 }
 
@@ -41,7 +41,7 @@ location ^~ /crow/frontend/web {
 	error_log /var/log/nginx/crow-frontend-error.log warn;
 	access_log /var/log/nginx/crow-frontend-access.log main if=$loggable;
 	
-    try_files $uri $uri/ /crow/frontend/web/index.php;
+    try_files $uri $uri/ /crow/frontend/web/index.php$is_args$args;
     include snippets/php-fpm.conf;
 }
 
@@ -50,7 +50,7 @@ location ^~ /crow/api/web {
 	error_log /var/log/nginx/crow-api-error.log warn;
 	access_log /var/log/nginx/crow-api-access.log main if=$loggable;
 	
-    try_files $uri $uri/ /crow/api/web/index.php;
+    try_files $uri $uri/ /crow/api/web/index.php$is_args$args;
     include snippets/php-fpm.conf;
 }
 

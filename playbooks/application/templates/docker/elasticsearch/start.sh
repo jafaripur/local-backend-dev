@@ -6,6 +6,7 @@ docker run -it -d \
            -e "discovery.type=single-node" \
            -e "ES_JAVA_OPTS=-Xms1g -Xmx1g" \
            -e "bootstrap.memory_lock=true" \
+           -e "ELASTIC_PASSWORD={{vault_elasticsearch_password}}" \
            -v {{docker_files_path}}/elasticsearch/data:/usr/share/elasticsearch/data \
            --restart unless-stopped \
            --log-driver json-file \
@@ -15,7 +16,7 @@ docker run -it -d \
            --ulimit nproc=64000:64000 \
            --memory {{docker_elasticsearch_memory}} \
            --ulimit memlock=-1:-1 \
-           --ulimit nofile=64000:64000 \
+           --ulimit nofile=65534:65534 \
            {{docker_elasticsearch_image}}
            
            

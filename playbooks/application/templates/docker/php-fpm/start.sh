@@ -13,5 +13,3 @@ docker run -it -d \
            --log-opt max-file=5 \
            --memory {{docker_phpfpm_memory}} \
            {{docker_phpfpm_image_build}}:latest
-           
-docker network connect {{docker_network_external}} {{docker_nginx_container}}

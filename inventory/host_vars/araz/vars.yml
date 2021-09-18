@@ -33,7 +33,7 @@ docker_elasticsearch_image: 'elasticsearch:7.14.1'
 docker_elasticsearch_container: 'elasticsearch'
 docker_elasticsearch_memory: '4GB'
 
-docker_mongodb_image: 'mongo:4.4.8-focal'
+docker_mongodb_image: 'mongo:5.0-focal'
 docker_mongodb_container: 'mongodb'
 docker_mongodb_memory: '1GB'
 docker_mongodb_external_port: 27018

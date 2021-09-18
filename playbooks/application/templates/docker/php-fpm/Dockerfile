@@ -5,7 +5,7 @@ LABEL maintainer="mjafaripr@yahoo.com"
 LABEL org.label-schema.name="araz/{{docker_phpfpm_image_build}}"
 
 RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
-	&& apk add --no-cache autoconf gcc binutils binutils-dev \
+	&& apk add --no-cache autoconf gcc binutils binutils-dev shadow \
 	g++ libtool make icu-dev curl-dev openssl-dev \
 	freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev \
 	libwebp-dev zlib-dev libxpm-dev gettext-dev libzip-dev \
@@ -17,7 +17,8 @@ RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 	&& pecl install igbinary \
 	&& docker-php-ext-enable mongodb igbinary \
 	&& docker-php-source delete \
-	&& apk del bash autoconf gcc binutils binutils-dev g++ libtool make \
+	&& usermod -u 1000 www-data && groupmod -g 1000 www-data \
+	&& apk del shadow bash autoconf gcc binutils binutils-dev g++ libtool make \
 	&& rm -rf /var/tmp/* /tmp/* /var/cache/apk/* \
 	&& mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
  
