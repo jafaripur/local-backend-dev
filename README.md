@@ -82,6 +82,8 @@ php -v
 composer --version
 node --version
 node npm --version
+node yarn --version
+node gulp --version
 ```
 
 For NPM install or serve a nodejs application:
