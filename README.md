@@ -13,6 +13,7 @@ Local development stacks:
 - Redis
 - Elasticsearch
 - MongoDB
+- NodeJs (NPM, Yarn, Gulp)
 
 ## Install Ansible
 

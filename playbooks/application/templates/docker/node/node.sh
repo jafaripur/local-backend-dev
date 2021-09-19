@@ -11,7 +11,6 @@ if [ "$1" = "npm" ]; then
 			--workdir /home/node/app \
 			-p 127.0.0.1:${PORT-$DEFAULT_PORT}:${PORT-$DEFAULT_PORT} \
 			-u $(id -u ${USER}):$(id -g ${USER}) \
-			-e "NODE_ENV=production" \
 			-e "NPM_CONFIG_LOGLEVEL=info" \
 			-e "HOST=${HOST-$DEFAULT_HOST}" \
 			-e "PORT=${PORT-$DEFAULT_PORT}" \
@@ -28,7 +27,6 @@ elif [ "$1" = "yarn" ]; then
 			--workdir /home/node/app \
 			-p 127.0.0.1:${PORT-$DEFAULT_PORT}:${PORT-$DEFAULT_PORT} \
 			-u $(id -u ${USER}):$(id -g ${USER}) \
-			-e "NODE_ENV=production" \
 			-e "NPM_CONFIG_LOGLEVEL=info" \
 			-e "HOST=${HOST-$DEFAULT_HOST}" \
 			-e "PORT=${PORT-$DEFAULT_PORT}" \
@@ -45,10 +43,7 @@ elif [ "$1" = "gulp" ]; then
 			--workdir /home/node/app \
 			-p 127.0.0.1:${PORT-$DEFAULT_PORT}:${PORT-$DEFAULT_PORT} \
 			-u $(id -u ${USER}):$(id -g ${USER}) \
-			-e "NODE_ENV=production" \
 			-e "NPM_CONFIG_LOGLEVEL=info" \
-			-e "HOST=${HOST-$DEFAULT_HOST}" \
-			-e "PORT=${PORT-$DEFAULT_PORT}" \
 			--log-driver json-file \
 			--log-opt max-size=10m \
 			--log-opt max-file=5 \
@@ -62,7 +57,6 @@ else
 			--workdir /home/node/app \
 			-p 127.0.0.1:${PORT-$DEFAULT_PORT}:${PORT-$DEFAULT_PORT} \
 			-u $(id -u ${USER}):$(id -g ${USER}) \
-			-e "NODE_ENV=production" \
 			-e "NPM_CONFIG_LOGLEVEL=info" \
 			-e "HOST=${HOST-$DEFAULT_HOST}" \
 			-e "PORT=${PORT-$DEFAULT_PORT}" \
