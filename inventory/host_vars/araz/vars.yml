@@ -26,8 +26,10 @@ docker_redis_memory: '256MB'
 
 docker_phpcli_image: 'php:8.0-cli-alpine3.14'
 docker_phpcli_image_build: 'phpcli-8.0-alpine-custom'
-docker_phpcli_container: 'phpcli'
 docker_phpcli_memory: '1GB'
+
+docker_node_image: 'node:14-alpine'
+docker_node_memory: '1GB'
 
 docker_elasticsearch_image: 'elasticsearch:7.14.1'
 docker_elasticsearch_container: 'elasticsearch'

@@ -63,4 +63,8 @@
        path: ~/.bashrc
        line: "alias composer='{{docker_files_path}}/php-cli/composer.sh'"
 
+   - name: "Add alias for Node"
+     lineinfile:
+       path: ~/.bashrc
+       line: "alias node='{{docker_files_path}}/node/node.sh'"
 ...
