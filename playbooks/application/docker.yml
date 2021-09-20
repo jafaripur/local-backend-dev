@@ -53,18 +53,15 @@
       - '{{docker_files_path}}/mongodb/data/log'
       - '{{docker_files_path}}/mongodb/data/home'
 
-   - name: "Add alias for PHP-CLI"
+   - name: "Add alias for docker container"
      lineinfile:
        path: ~/.bashrc
-       line: "alias php='{{docker_files_path}}/php-cli/cli.sh'"
-
-   - name: "Add alias for Composer"
-     lineinfile:
-       path: ~/.bashrc
-       line: "alias composer='{{docker_files_path}}/php-cli/composer.sh'"
-
-   - name: "Add alias for Node"
-     lineinfile:
-       path: ~/.bashrc
-       line: "alias node='{{docker_files_path}}/node/node.sh'"
+       line: '{{item}}'
+     with_items:
+      - "alias php='{{docker_files_path}}/php-cli/cli.sh'"
+      - "alias composer='{{docker_files_path}}/php-cli/composer.sh'"
+      - "alias node='{{docker_files_path}}/node/node.sh'"
+      - "alias mongo='{{docker_files_path}}/mongodb/mongodb.sh'"
+      - "alias redis='{{docker_files_path}}/redis/redis.sh'"
+      - "alias nginx='{{docker_files_path}}/nginx/nginx.sh'"
 ...

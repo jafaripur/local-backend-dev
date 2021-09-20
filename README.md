@@ -1,5 +1,7 @@
 # Local system configuration for back-end development
 
+Local development system configuration with `Ansible` and `Docker`.
+
 ## Stacks
 
 Local development stacks:
@@ -44,7 +46,7 @@ ansible-vault encrypt inventory/host_vars/araz/vault.yml
 
 ### MongoDB KeyFile
 
-For replica in mongodb create key file.
+For replica in mongodb create key file. By default MongoDB start standalone.
 
 ```
 openssl rand -base64 756 > playbooks/application/templates/docker/mongodb/config/keyfile
@@ -71,15 +73,21 @@ run this one for copy docker files:
 
 ```
 ansible-playbook playbooks/application/docker.yml -K  # This can be run several time for update docker config or shell script.
+
 ansible-playbook playbooks/application/logrotate.yml -K # This is for logrotate
 ```
 
 Docker file available in this variable path `application_working_path` which is defined in host var file.
 
-For PHP-CLI, composer and node alias defined:
+## Aliases
+
+This aliases defined in bash configuration for easy access to container.
 
 ```
-php -v
+mongo --version # Mongosh shell
+redis --version # Redis cli
+nginx -v # nginx -t
+php --version
 composer --version
 node --version
 node npm --version
@@ -87,16 +95,23 @@ node yarn --version
 node gulp --version
 ```
 
-For NPM install or serve a nodejs application:
+## NodeJS
+
+Package can be install with `NPM` or `Yarn`
 
 ```
-node npm i -f #install
+node npm i -f
+node yarn --production=false
 
+```
+
+For serve application with npm:
+
+```
 export PORT=3008 && export HOST=0.0.0.0 && node npm run start
-
 ```
 
-Default value for `PORT` is `3008` and `HOST` is `0.0.0.0`
+Default value for `PORT` is `3008` and `HOST` is `0.0.0.0`.
 
 `env` variable `HOST` and `PORT` used for serving the application.
 

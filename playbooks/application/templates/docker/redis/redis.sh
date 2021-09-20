@@ -5,4 +5,4 @@
 # AUTH 123456
 #
 
-docker exec -it {{docker_redis_container}} redis-cli
+docker exec -it {{docker_redis_container}} redis-cli "$@"
