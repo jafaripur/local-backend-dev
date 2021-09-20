@@ -17,7 +17,6 @@ docker run -it -d \
            --ulimit nproc=64000:64000 \
            --memory {{docker_elasticsearch_memory}} \
            --ulimit memlock=-1:-1 \
-           --ulimit nofile=65534:65534 \
            {{docker_elasticsearch_image}}
            
            
