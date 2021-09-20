@@ -11,6 +11,6 @@
 
     - name: "Install GIT"
       apt:
-        package: vim
+        package: git
         state: present
 ...
