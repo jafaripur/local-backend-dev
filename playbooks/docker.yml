@@ -82,7 +82,7 @@
   handlers:
     - name: restart docker
       systemd:
-        name: ufw
+        name: docker
         daemon_reload: yes
         state: restarted
 
