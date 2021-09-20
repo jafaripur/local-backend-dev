@@ -64,4 +64,5 @@
       - "alias mongo='{{docker_files_path}}/mongodb/mongodb.sh'"
       - "alias redis='{{docker_files_path}}/redis/redis.sh'"
       - "alias nginx='{{docker_files_path}}/nginx/nginx.sh'"
+      - "alias mysql='{{docker_files_path}}/mysql/mysql.sh'"
 ...

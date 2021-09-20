@@ -87,6 +87,7 @@ This aliases defined in bash configuration for easy access to container.
 mongo --version # Mongosh shell
 redis --version # Redis cli
 nginx -v # nginx -t
+mysql --version
 php --version
 composer --version
 node --version
