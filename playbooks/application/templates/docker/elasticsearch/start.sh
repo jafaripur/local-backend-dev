@@ -8,7 +8,7 @@ docker run -it -d \
            -e "bootstrap.memory_lock=true" \
            -e "ELASTIC_PASSWORD={{vault_elasticsearch_password}}" \
            -e "xpack.security.enabled=true" \
-           -v {{docker_files_path}}/elasticsearch/data:/usr/share/elasticsearch/data \
+           -v "{{docker_files_path}}/elasticsearch/data:/usr/share/elasticsearch/data" \
            --restart unless-stopped \
            --log-driver json-file \
            --log-opt max-size=10m \

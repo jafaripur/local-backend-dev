@@ -9,11 +9,11 @@ docker run -it -d \
            --name {{docker_mongodb_container}} \
            --network {{docker_network_internal}} \
            -p 127.0.0.1:{{docker_mongodb_external_port}}:27017 \
-           -v {{docker_files_path}}/mongodb/data/home:/home/mongodb \
-           -v {{docker_files_path}}/mongodb/config/mongod.conf:/etc/mongod.conf:ro \
-           -v {{docker_files_path}}/mongodb/config/keyfile:/data/keyfile:ro \
-           -v {{docker_files_path}}/mongodb/data/db:/data/db \
-           -v {{docker_files_path}}/mongodb/data/log:/var/log/mongodb \
+           -v "{{docker_files_path}}/mongodb/data/home:/home/mongodb" \
+           -v "{{docker_files_path}}/mongodb/config/mongod.conf:/etc/mongod.conf:ro" \
+           -v "{{docker_files_path}}/mongodb/config/keyfile:/data/keyfile:ro" \
+           -v "{{docker_files_path}}/mongodb/data/db:/data/db" \
+           -v "{{docker_files_path}}/mongodb/data/log:/var/log/mongodb" \
            --restart unless-stopped \
            --log-driver json-file \
            --log-opt max-size=10m \
