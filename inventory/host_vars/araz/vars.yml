@@ -24,6 +24,10 @@ docker_redis_image: 'redis:6.2.5-alpine3.14'
 docker_redis_container: 'redis'
 docker_redis_memory: '256MB'
 
+docker_rabbitmq_image: 'rabbitmq:3.9.5-management-alpine'
+docker_rabbitmq_container: 'rabbitmq'
+docker_rabbitmq_memory: '1GB'
+
 docker_phpcli_image: 'php:8.0-cli-alpine3.14'
 docker_phpcli_image_build: 'phpcli-8.0-alpine-custom'
 docker_phpcli_memory: '1GB'

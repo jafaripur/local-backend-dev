@@ -15,6 +15,7 @@ Local development stacks:
 - Redis
 - Elasticsearch
 - MongoDB
+- RabbitMQ
 - NodeJs (NPM, Yarn, Gulp)
 
 ## Install Ansible
@@ -89,6 +90,7 @@ redis --version # Redis cli
 nginx -v # nginx -t
 mysql --version
 php --version
+rabbitmq --version  # same as rabbitmqctl
 composer --version
 node --version
 node npm --version

@@ -43,7 +43,7 @@
        owner: '999'
        group: '999'
 
-   - name: Fix mongodb data folder permissions
+   - name: Fix container folders permissions
      become: yes
      file:
        path: '{{item}}'
@@ -52,6 +52,22 @@
      with_items:
       - '{{docker_files_path}}/mongodb/data/log'
       - '{{docker_files_path}}/mongodb/data/home'
+      #- '{{docker_files_path}}/rabbitmq/data/log'
+      #- '{{docker_files_path}}/rabbitmq/data/lib'
+      #- '{{docker_files_path}}/nginx/runtime/logs'
+      #- '{{docker_files_path}}/nginx/runtime/caches'
+      #- '{{docker_files_path}}/mysql/data/db'
+      #- '{{docker_files_path}}/mysql/data/log'
+      #- '{{docker_files_path}}/elasticsearch/data'
+      #- '{{docker_files_path}}/redis/data'
+
+   - name: Fix config files permission
+     file:
+       path: '{{item}}'
+       mode: 'u=rw,g=r,o=r' #0644
+     with_items:
+      - '{{docker_files_path}}/rabbitmq/config/enabled_plugins'
+      - '{{docker_files_path}}/rabbitmq/config/rabbitmq.conf'
 
    - name: "Add alias for docker container"
      lineinfile:
@@ -65,4 +81,5 @@
       - "alias redis='{{docker_files_path}}/redis/redis.sh'"
       - "alias nginx='{{docker_files_path}}/nginx/nginx.sh'"
       - "alias mysql='{{docker_files_path}}/mysql/mysql.sh'"
+      - "alias rabbitmq='{{docker_files_path}}/rabbitmq/rabbitmq.sh'"
 ...
