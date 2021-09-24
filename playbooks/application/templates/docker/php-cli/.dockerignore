@@ -1,3 +1,4 @@
 *.sh
 Dockerfile
 /config
+/data
