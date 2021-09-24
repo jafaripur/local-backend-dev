@@ -15,6 +15,8 @@ Local development stacks:
 - Redis
 - Elasticsearch
 - MongoDB
+- PostgreSQL
+- phpPgAdmin
 - RabbitMQ
 - NodeJs (NPM, Yarn, Gulp)
 
@@ -86,6 +88,7 @@ This aliases defined in bash configuration for easy access to container.
 
 ```
 mongo --version # Mongosh shell
+postgres --version # psql -U postgres --version
 redis --version # Redis cli
 nginx -v # nginx -t
 mysql --version

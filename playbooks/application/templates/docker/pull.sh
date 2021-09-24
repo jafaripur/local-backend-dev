@@ -10,4 +10,6 @@ docker pull {{docker_mysql_image}}
 docker pull {{docker_php_myadmin_image}}
 docker pull {{docker_node_image}}
 docker pull {{docker_rabbitmq_image}}
+docker pull {{docker_postgres_image}}
+docker pull {{docker_php_pgmyadmin_image}}
 docker pull composer:latest

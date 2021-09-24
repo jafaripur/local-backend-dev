@@ -82,4 +82,5 @@
       - "alias nginx='{{docker_files_path}}/nginx/nginx.sh'"
       - "alias mysql='{{docker_files_path}}/mysql/mysql.sh'"
       - "alias rabbitmq='{{docker_files_path}}/rabbitmq/rabbitmq.sh'"
+      - "alias postgres='{{docker_files_path}}/postgres/postgres.sh'"
 ...

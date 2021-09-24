@@ -54,6 +54,15 @@ docker_php_myadmin_container: 'php-myadmin'
 docker_php_myadmin_memory: '1GB'
 docker_php_myadmin_external_port: 8090
 
+docker_postgres_image: 'postgres:13.4-alpine'
+docker_postgres_container: 'postgres'
+docker_postgres_memory: '1GB'
+
+docker_php_pgmyadmin_image: 'bitnami/phppgadmin:latest'
+docker_php_pgmyadmin_container: 'php-pgmyadmin'
+docker_php_pgmyadmin_memory: '1GB'
+docker_php_pgmyadmin_external_port: 8091
+
 docker_nginx_image: 'nginx:1.21-alpine'
 docker_nginx_container: 'nginx'
 docker_nginx_container_memory: '1GB'
