@@ -14,9 +14,6 @@ if [ "$1" = "npm" ]; then
 			-e "NPM_CONFIG_LOGLEVEL=info" \
 			-e "HOST=${HOST-$DEFAULT_HOST}" \
 			-e "PORT=${PORT-$DEFAULT_PORT}" \
-			--log-driver json-file \
-			--log-opt max-size=10m \
-			--log-opt max-file=5 \
 			--memory {{docker_node_memory}} \
 			{{docker_node_image_build}} "$@"
 elif [ "$1" = "yarn" ]; then
@@ -30,9 +27,6 @@ elif [ "$1" = "yarn" ]; then
 			-e "NPM_CONFIG_LOGLEVEL=info" \
 			-e "HOST=${HOST-$DEFAULT_HOST}" \
 			-e "PORT=${PORT-$DEFAULT_PORT}" \
-			--log-driver json-file \
-			--log-opt max-size=10m \
-			--log-opt max-file=5 \
 			--memory {{docker_node_memory}} \
 			{{docker_node_image_build}} "$@"
 elif [ "$1" = "gulp" ]; then
@@ -45,9 +39,6 @@ elif [ "$1" = "gulp" ]; then
 			-p 127.0.0.1:${PORT-$DEFAULT_PORT}:${PORT-$DEFAULT_PORT} \
 			-u $(id -u ${USER}):$(id -g ${USER}) \
 			-e "NPM_CONFIG_LOGLEVEL=info" \
-			--log-driver json-file \
-			--log-opt max-size=10m \
-			--log-opt max-file=5 \
 			--memory {{docker_node_memory}} \
 			{{docker_node_image_build}} "$@"
 else
@@ -61,9 +52,6 @@ else
 			-e "NPM_CONFIG_LOGLEVEL=info" \
 			-e "HOST=${HOST-$DEFAULT_HOST}" \
 			-e "PORT=${PORT-$DEFAULT_PORT}" \
-			--log-driver json-file \
-			--log-opt max-size=10m \
-			--log-opt max-file=5 \
 			--memory {{docker_node_memory}} \
 			{{docker_node_image_build}} node "$@"	
 fi
