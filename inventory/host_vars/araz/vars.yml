@@ -63,6 +63,10 @@ docker_php_pgmyadmin_container: 'php-pgmyadmin'
 docker_php_pgmyadmin_memory: '1GB'
 docker_php_pgmyadmin_external_port: 8091
 
+docker_go_image: 'golang:1.17.1-alpine3.14'
+docker_go_container: 'golang'
+docker_go_memory: '1GB'
+
 docker_nginx_image: 'nginx:1.21-alpine'
 docker_nginx_container: 'nginx'
 docker_nginx_container_memory: '1GB'

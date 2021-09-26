@@ -15,6 +15,7 @@ Local development stacks:
 - Redis
 - Elasticsearch
 - MongoDB
+- Go
 - PostgreSQL
 - phpPgAdmin
 - RabbitMQ
@@ -93,8 +94,9 @@ redis --version # Redis cli
 nginx -v # nginx -t
 mysql --version
 php --version
-rabbitmq --version  # same as rabbitmqctl
 composer --version
+go version
+rabbitmq --version  # same as rabbitmqctl
 node --version
 node npm --version
 node yarn --version
