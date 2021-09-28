@@ -6,8 +6,8 @@ DEFAULT_HOST="0.0.0.0"
 if [ "$1" = "npm" ]; then
 	docker run --rm --interactive --tty \
 			-v "${PWD}:/home/node/app" \
-			-v $HOME/.npm:/.npm \
-			-v $HOME/.config:/.config \
+			-v "{{docker_files_path}}/node/data/npm:/.npm" \
+			-v "{{docker_files_path}}/node/data/config:/.config" \
 			--workdir /home/node/app \
 			-p 127.0.0.1:${PORT-$DEFAULT_PORT}:${PORT-$DEFAULT_PORT} \
 			-u $(id -u ${USER}):$(id -g ${USER}) \
@@ -32,7 +32,6 @@ elif [ "$1" = "yarn" ]; then
 elif [ "$1" = "gulp" ]; then
 	docker run --rm --interactive --tty \
 			-v "${PWD}:/home/node/app" \
-			-v $HOME/.npm:/.npm \
 			-v "{{docker_files_path}}/node/data/npm:/.npm" \
 			-v "{{docker_files_path}}/node/data/config:/.config" \
 			--workdir /home/node/app \
