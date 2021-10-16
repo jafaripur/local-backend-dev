@@ -23,7 +23,7 @@ RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 
 #RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-VOLUME ["/project-files", "/usr/local/etc/php/conf.d"]
+VOLUME ["/var/www/html", "/usr/local/etc/php/conf.d"]
 
 #ENTRYPOINT ["php", "-a"]
 CMD ["php", "-a"]
