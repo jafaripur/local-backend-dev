@@ -72,6 +72,11 @@ docker_nginx_container: 'nginx'
 docker_nginx_container_memory: '1GB'
 docker_nginx_external_port: 8080
 
+docker_mongo_express_image: 'mongo-express:latest'
+docker_mongo_express_container: 'mongo-express'
+docker_mongo_express_container_memory: '500MB'
+docker_mongo_express_external_port: 8081
+
 docker_network_external: 'araz-frontend'
 docker_network_internal: 'araz-internal-network'
 

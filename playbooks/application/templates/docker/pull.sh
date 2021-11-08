@@ -14,3 +14,4 @@ docker pull {{docker_postgres_image}}
 docker pull {{docker_php_pgmyadmin_image}}
 docker pull {{docker_go_image}}
 docker pull composer:latest
+docker pull {{docker_mongo_express_image}}
