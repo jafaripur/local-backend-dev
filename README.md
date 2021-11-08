@@ -15,6 +15,7 @@ Local development stacks:
 - Redis
 - Elasticsearch
 - MongoDB
+- Mongo Express
 - Go
 - PostgreSQL
 - phpPgAdmin
