@@ -6,13 +6,13 @@ LABEL org.label-schema.name="araz/{{docker_phpfpm_image_build}}"
 
 RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 	&& apk add --no-cache autoconf gcc binutils binutils-dev shadow \
-	g++ libtool make icu-dev curl-dev openssl-dev \
+	g++ libtool make icu-dev curl-dev openssl-dev libxml2-dev \
 	freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev \
 	libwebp-dev zlib-dev libxpm-dev gettext-dev libzip-dev \
 	&& docker-php-source extract \
 	&& docker-php-ext-configure intl && docker-php-ext-install -j$(nproc) intl \
-	&& docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install -j$(nproc) gd \
-	&& docker-php-ext-install bcmath gettext pcntl opcache zip \
+	&& docker-php-ext-configwure gd --with-freetype --with-jpeg && docker-php-ext-install -j$(nproc) gd \
+	&& docker-php-ext-install bcmath gettext pcntl opcache zip soap \
 	&& pecl install mongodb \   
 	&& pecl install igbinary \
 	&& docker-php-ext-enable mongodb igbinary \
