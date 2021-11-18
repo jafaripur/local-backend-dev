@@ -40,6 +40,16 @@ elif [ "$1" = "gulp" ]; then
 			-e "NPM_CONFIG_LOGLEVEL=info" \
 			--memory {{docker_node_memory}} \
 			{{docker_node_image_build}} "$@"
+elif [ "$1" = "apidoc" ]; then
+	docker run --rm --interactive --tty \
+			-v "${PWD}:/home/node/app" \
+			-v "{{docker_files_path}}/node/data/npm:/.npm" \
+			-v "{{docker_files_path}}/node/data/config:/.config" \
+			--workdir /home/node/app \
+			-u $(id -u ${USER}):$(id -g ${USER}) \
+			-e "NPM_CONFIG_LOGLEVEL=info" \
+			--memory {{docker_node_memory}} \
+			{{docker_node_image_build}} "$@"
 else
 	docker run --rm --interactive --tty \
 			-v "${PWD}:/home/node/app" \
