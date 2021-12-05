@@ -1,10 +1,12 @@
 #!/bin/bash
 
+projectFolder="$(basename $PWD)"
+
 docker run -it --rm \
            --network {{docker_network_internal}} \
-           -v "${PWD}:/var/www/html" \
+           -v "${PWD}:/var/www/html/${projectFolder}" \
            -v {{docker_files_path}}/php-cli/config/php-custom.ini:/usr/local/etc/php/conf.d/99-custom.ini \
-           --workdir /var/www/html \
+           --workdir "/var/www/html/${projectFolder}" \
            -u $(id -u ${USER}):$(id -g ${USER}) \
            --memory {{docker_phpcli_memory}} \
            {{docker_phpcli_image_build}}:latest \
