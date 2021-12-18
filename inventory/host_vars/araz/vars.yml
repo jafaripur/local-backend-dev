@@ -35,12 +35,6 @@ docker_php8fpm_container: 'php8-fpm'
 docker_php8fpm_memory: '1GB'
 docker_php8fpm_port: 9000
 
-
-
-
-
-
-
 docker_php81cli_image: 'php:8.1-cli-alpine3.15'
 docker_php81cli_image_build: 'phpcli-8.1-alpine-custom'
 docker_php81cli_memory: '1GB'
@@ -50,15 +44,6 @@ docker_php81fpm_image_build: 'phpfpm-8.1-alpine-custom'
 docker_php81fpm_container: 'php81-fpm'
 docker_php81fpm_memory: '1GB'
 docker_php81fpm_port: 9000
-
-
-
-
-
-
-
-
-
 
 docker_composer_image: 'composer:latest'
 
