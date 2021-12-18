@@ -1,21 +1,21 @@
-FROM {{docker_phpcli_image}}
+FROM {{docker_php8cli_image}}
 
 LABEL maintainer="mjafaripr@yahoo.com"
 
-LABEL org.label-schema.name="araz/{{docker_phpcli_image_build}}"
+LABEL org.label-schema.name="araz/{{docker_php8cli_image_build}}"
 
 RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 	&& apk add --no-cache autoconf gcc binutils binutils-dev \
 	g++ libtool make icu-dev curl-dev openssl-dev libxml2-dev \
 	freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev \
 	libwebp-dev zlib-dev libxpm-dev gettext-dev libzip-dev \
+	&& pecl install mongodb \
+	&& pecl install igbinary \
+	&& docker-php-ext-enable mongodb igbinary \
 	&& docker-php-source extract \
 	&& docker-php-ext-configure intl && docker-php-ext-install -j$(nproc) intl \
 	&& docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install -j$(nproc) gd \
 	&& docker-php-ext-install bcmath gettext pcntl opcache zip soap \
-	&& pecl install mongodb \
-	&& pecl install igbinary \
-	&& docker-php-ext-enable mongodb igbinary \
 	&& docker-php-source delete \
 	&& apk del bash autoconf gcc binutils binutils-dev g++ libtool make \
 	&& rm -rf /var/tmp/* /tmp/* /var/cache/apk/* \

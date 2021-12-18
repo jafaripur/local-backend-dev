@@ -1,21 +1,21 @@
-FROM {{docker_phpfpm_image}}
+FROM {{docker_php7fpm_image}}
 
 LABEL maintainer="mjafaripr@yahoo.com"
 
-LABEL org.label-schema.name="araz/{{docker_phpfpm_image_build}}"
+LABEL org.label-schema.name="araz/{{docker_php7fpm_image_build}}"
 
 RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 	&& apk add --no-cache autoconf gcc binutils binutils-dev shadow \
 	g++ libtool make icu-dev curl-dev openssl-dev libxml2-dev \
 	freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev \
 	libwebp-dev zlib-dev libxpm-dev gettext-dev libzip-dev \
-	&& docker-php-source extract \
-	&& docker-php-ext-configure intl && docker-php-ext-install -j$(nproc) intl \
-	&& docker-php-ext-configwure gd --with-freetype --with-jpeg && docker-php-ext-install -j$(nproc) gd \
-	&& docker-php-ext-install bcmath gettext pcntl opcache zip soap \
-	&& pecl install mongodb \   
+	&& pecl install mongodb \
 	&& pecl install igbinary \
 	&& docker-php-ext-enable mongodb igbinary \
+	&& docker-php-source extract \
+	&& docker-php-ext-configure intl && docker-php-ext-install -j$(nproc) intl \
+	&& docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install -j$(nproc) gd \
+	&& docker-php-ext-install bcmath gettext pcntl opcache zip soap \
 	&& docker-php-source delete \
 	&& usermod -u 1000 www-data && groupmod -g 1000 www-data \
 	&& apk del shadow bash autoconf gcc binutils binutils-dev g++ libtool make \
@@ -26,6 +26,6 @@ RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 
 VOLUME ["/var/www/html"]
 
-EXPOSE {{docker_phpfpm_port}}
+EXPOSE {{docker_php7fpm_port}}
 
 ENTRYPOINT ["php-fpm", "--nodaemonize"];

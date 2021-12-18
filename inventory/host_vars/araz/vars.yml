@@ -14,29 +14,41 @@ docker_files_path: '{{application_working_path}}/docker'
 
 php_project_path: /home/{{ansible_user}}/projects
 
-docker_phpfpm_image: 'php:8.0-fpm-alpine3.14'
-docker_phpfpm_image_build: 'phpfpm-8.0-alpine-custom'
-docker_phpfpm_container: 'phpfpm'
-docker_phpfpm_memory: '1GB'
-docker_phpfpm_port: 9000
+docker_php8fpm_image: 'php:8.0-fpm-alpine3.15'
+docker_php8fpm_image_build: 'phpfpm-8.0-alpine-custom'
+docker_php8fpm_container: 'php8-fpm'
+docker_php8fpm_memory: '1GB'
+docker_php8fpm_port: 9000
 
-docker_redis_image: 'redis:6.2.5-alpine3.14'
+docker_php8cli_image: 'php:8.0-cli-alpine3.15'
+docker_php8cli_image_build: 'phpcli-8.0-alpine-custom'
+docker_php8cli_memory: '1GB'
+
+docker_php7fpm_image: 'php:7.4-fpm-alpine3.15'
+docker_php7fpm_image_build: 'phpfpm-7.4-alpine-custom'
+docker_php7fpm_container: 'php7-fpm'
+docker_php7fpm_memory: '1GB'
+docker_php7fpm_port: 9000
+
+docker_php7cli_image: 'php:7.4-cli-alpine3.15'
+docker_php7cli_image_build: 'phpcli-7.4-alpine-custom'
+docker_php7cli_memory: '1GB'
+
+docker_composer_image: 'composer:latest'
+
+docker_redis_image: 'redis:6.2.6-alpine3.15'
 docker_redis_container: 'redis'
 docker_redis_memory: '256MB'
 
-docker_rabbitmq_image: 'rabbitmq:3.9.5-management-alpine'
+docker_rabbitmq_image: 'rabbitmq:3.9.11-management-alpine'
 docker_rabbitmq_container: 'rabbitmq'
 docker_rabbitmq_memory: '1GB'
-
-docker_phpcli_image: 'php:8.0-cli-alpine3.14'
-docker_phpcli_image_build: 'phpcli-8.0-alpine-custom'
-docker_phpcli_memory: '1GB'
 
 docker_node_image: 'node:14-alpine'
 docker_node_image_build: 'node-14-alpine-custom'
 docker_node_memory: '1GB'
 
-docker_elasticsearch_image: 'elasticsearch:7.14.1'
+docker_elasticsearch_image: 'elasticsearch:7.16.1'
 docker_elasticsearch_container: 'elasticsearch'
 docker_elasticsearch_memory: '4GB'
 
@@ -45,7 +57,7 @@ docker_mongodb_container: 'mongodb'
 docker_mongodb_memory: '1GB'
 docker_mongodb_external_port: 27018
 
-docker_mysql_image: 'mysql:8.0.26'
+docker_mysql_image: 'mysql:8.0.27'
 docker_mysql_container: 'mysql'
 docker_mysql_memory: '1GB'
 
@@ -63,7 +75,7 @@ docker_php_pgmyadmin_container: 'php-pgmyadmin'
 docker_php_pgmyadmin_memory: '1GB'
 docker_php_pgmyadmin_external_port: 8091
 
-docker_go_image: 'golang:1.17.1-alpine3.14'
+docker_go_image: 'golang:1.17.5-alpine3.15'
 docker_go_container: 'golang'
 docker_go_memory: '1GB'
 
@@ -86,3 +98,34 @@ docker_user: '{{ansible_user}}'
 ufw_rules:
   - { direction: 'incoming', policy: 'deny'}
   - { direction: 'outgoing', policy: 'allow'}
+
+available_applications:
+  - elasticsearch
+  - go
+  - mongo-express
+  - mysql
+  - nginx
+  - node
+  - php7-cli
+  - php7-fpm
+  - php8-cli
+  - php8-fpm
+  - php-composer
+  - php-myadmin
+  - php-pgmyadmin
+  - postgres
+  - rabbitmq
+  - redis
+  
+path_aliases:
+  - "alias php8='{{docker_files_path}}/php8-cli/cli.sh'"
+  - "alias php7='{{docker_files_path}}/php7-cli/cli.sh'"
+  - "alias composer='{{docker_files_path}}/php-composer/composer.sh'"
+  - "alias node='{{docker_files_path}}/node/node.sh'"
+  - "alias mongo='{{docker_files_path}}/mongodb/mongodb.sh'"
+  - "alias redis='{{docker_files_path}}/redis/redis.sh'"
+  - "alias nginx='{{docker_files_path}}/nginx/nginx.sh'"
+  - "alias mysql='{{docker_files_path}}/mysql/mysql.sh'"
+  - "alias rabbitmq='{{docker_files_path}}/rabbitmq/rabbitmq.sh'"
+  - "alias postgres='{{docker_files_path}}/postgres/postgres.sh'"
+  - "alias go='{{docker_files_path}}/go/go.sh'"

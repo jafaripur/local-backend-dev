@@ -3,6 +3,8 @@
 
 - name: Config docker env
   hosts: application
+  gather_facts: no
+  strategy: free
   tasks:
    - name: Creates directory for docker
      file:
@@ -10,30 +12,50 @@
        state: directory
        recurse: yes
 
-   - name: Ensure directory structure for docker
-     file:
-       path: '{{docker_files_path}}/{{item.path}}'
-       state: directory
-       mode: '{{item.mode}}'
-       force: no
-       recurse: yes
-     with_filetree: templates/docker/
-     when: item.state == 'directory'
-     ignore_errors: yes
+   - name: Copy docker pull and network files
+     template:
+       src: 'templates/docker/{{item}}'
+       dest: '{{docker_files_path}}/{{item}}'
+       mode: 'u=rwx,g=r,o=r'
+       force: yes
+     with_items: 
+        - pull.sh
+        - network.sh
+        - prune.sh
      no_log: true
 
-   - name: Copy Docker files
-     template:
-       src: '{{item.src}}'
-       dest: '{{docker_files_path}}/{{item.path}}'
-       force: yes
-       mode: '{{item.mode}}'
-       group: '{{item.group}}'
-       owner: '{{item.owner}}'
-     with_filetree: templates/docker/
-     when: item.state == 'file' and (item.src | basename) != '.gitignore'
-     ignore_errors: yes
+   - name: Ensure directory structure for docker
+     include_tasks: _inner_docker.yml
+     loop: "{{available_applications}}"
+     loop_control:
+       loop_var: item_app
      no_log: true
+
+
+   #- name: Ensure directory structure for docker
+   #  file:
+   #    path: '{{docker_files_path}}/{{item.path}}'
+   #    state: directory
+   #    mode: '{{item.mode}}'
+   #    force: no
+   #    recurse: yes
+   #  with_filetree: "templates/docker/"
+   #  when: item.state == 'directory'
+   #  ignore_errors: yes
+   #  no_log: true
+
+   #- name: Copy Docker files
+   #  template:
+   #    src: '{{item.src}}'
+   #    dest: '{{docker_files_path}}/{{item.path}}'
+   #    force: yes
+   #    mode: '{{item.mode}}'
+   #    group: '{{item.group}}'
+   #    owner: '{{item.owner}}'
+   #  with_filetree: "templates/docker/"
+   #  when: item.state == 'file' and (item.src | basename) != '.gitignore'
+   #  ignore_errors: yes
+   #  no_log: true
 
    - name: Fix mongodb key permissions
      become: yes
@@ -42,6 +64,8 @@
        mode: '0400'
        owner: '999'
        group: '999'
+     ignore_errors: yes
+     when: "docker_mongodb_image is defined"
 
    - name: Fix container folders permissions
      become: yes
@@ -52,6 +76,7 @@
      with_items:
       - '{{docker_files_path}}/mongodb/data/log'
       - '{{docker_files_path}}/mongodb/data/home'
+     when: "docker_mongodb_image is defined"
       #- '{{docker_files_path}}/rabbitmq/data/log'
       #- '{{docker_files_path}}/rabbitmq/data/lib'
       #- '{{docker_files_path}}/nginx/runtime/logs'
@@ -68,20 +93,11 @@
      with_items:
       - '{{docker_files_path}}/rabbitmq/config/enabled_plugins'
       - '{{docker_files_path}}/rabbitmq/config/rabbitmq.conf'
+     when: "docker_rabbitmq_image is defined"
 
    - name: "Add alias for docker container"
      lineinfile:
        path: ~/.bashrc
        line: '{{item}}'
-     with_items:
-      - "alias php='{{docker_files_path}}/php-cli/cli.sh'"
-      - "alias composer='{{docker_files_path}}/php-cli/composer.sh'"
-      - "alias node='{{docker_files_path}}/node/node.sh'"
-      - "alias mongo='{{docker_files_path}}/mongodb/mongodb.sh'"
-      - "alias redis='{{docker_files_path}}/redis/redis.sh'"
-      - "alias nginx='{{docker_files_path}}/nginx/nginx.sh'"
-      - "alias mysql='{{docker_files_path}}/mysql/mysql.sh'"
-      - "alias rabbitmq='{{docker_files_path}}/rabbitmq/rabbitmq.sh'"
-      - "alias postgres='{{docker_files_path}}/postgres/postgres.sh'"
-      - "alias go='{{docker_files_path}}/go/go.sh'"
+     with_items: "{{path_aliases | default([])}}"
 ...

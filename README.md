@@ -7,8 +7,8 @@ Local development system configuration with `Ansible` and `Docker`.
 Local development stacks:
 
 - Nginx
-- PHP-FPM
-- PHP-CLI
+- PHP-FPM (7, 8)
+- PHP-CLI (7, 8)
 - Composer
 - MySQL
 - PHPMyAdmin

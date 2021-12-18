@@ -1,7 +1,7 @@
 #!/bin/bash
 
 docker run -it -d \
-           --name {{docker_phpfpm_container}} \
+           --name {{docker_php8fpm_container}} \
            --network {{docker_network_internal}} \
            -v "{{php_project_path}}:/var/www/html" \
            -v "{{docker_files_path}}/php-fpm/config/php-custom.ini:/usr/local/etc/php/conf.d/99-custom.ini" \
@@ -11,5 +11,5 @@ docker run -it -d \
            --log-driver json-file \
            --log-opt max-size=10m \
            --log-opt max-file=5 \
-           --memory {{docker_phpfpm_memory}} \
-           {{docker_phpfpm_image_build}}:latest
+           --memory {{docker_php8fpm_memory}} \
+           {{docker_php8fpm_image_build}}:latest
