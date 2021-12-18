@@ -10,5 +10,6 @@ docker run -it -d \
            --log-opt max-size=10m \
            --log-opt max-file=5 \
            --memory {{docker_redis_memory}} \
+           --cpus 1 \
            {{docker_redis_image}} \
            redis-server /usr/local/etc/redis/redis.conf

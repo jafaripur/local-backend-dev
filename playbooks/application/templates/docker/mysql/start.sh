@@ -12,6 +12,7 @@ docker run -it -d \
            --log-opt max-size=10m \
            --log-opt max-file=5 \
            --memory {{docker_mysql_memory}} \
+           --cpus 1 \
            {{docker_mysql_image}} \
            --character-set-server=utf8mb4 \
            --collation-server=utf8mb4_unicode_ci

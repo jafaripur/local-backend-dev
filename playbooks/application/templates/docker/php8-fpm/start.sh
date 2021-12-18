@@ -12,4 +12,5 @@ docker run -it -d \
            --log-opt max-size=10m \
            --log-opt max-file=5 \
            --memory {{docker_php8fpm_memory}} \
+           --cpus 1 \
            {{docker_php8fpm_image_build}}:latest

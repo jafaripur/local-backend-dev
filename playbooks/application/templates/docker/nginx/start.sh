@@ -18,6 +18,7 @@ docker run -it -d \
            --log-opt max-file=5 \
            --ulimit nofile=65536:65536 \
            --memory {{docker_nginx_container_memory}} \
+           --cpus 1 \
            {{docker_nginx_image}}
            
            

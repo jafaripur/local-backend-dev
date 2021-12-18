@@ -10,6 +10,7 @@ docker run -it -d \
            --log-opt max-size=10m \
            --log-opt max-file=5 \
            --memory {{docker_php_myadmin_memory}} \
+           --cpus 1 \
            {{docker_php_myadmin_image}}
            
 #-e MYSQL_ROOT_PASSWORD={{vault_mysql_root_password}} \
