@@ -94,7 +94,8 @@ postgres --version # psql -U postgres --version
 redis --version # Redis cli
 nginx -v # nginx -t
 mysql --version
-php --version
+php7 --version
+php8 --version
 composer --version
 go version
 rabbitmq --version  # same as rabbitmqctl
