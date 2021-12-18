@@ -4,13 +4,11 @@
   hosts: software
   become: yes
   tasks:
-    - name: "Install vim"
+    - name: 'Installing...'
       apt:
-        package: vim
+        package: "{{item}}"
         state: present
-
-    - name: "Install GIT"
-      apt:
-        package: git
-        state: present
+      with_items:
+        - vim
+        - git
 ...

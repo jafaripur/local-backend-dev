@@ -7,8 +7,8 @@ Local development system configuration with `Ansible` and `Docker`.
 Local development stacks:
 
 - Nginx
-- PHP-FPM (7, 8)
-- PHP-CLI (7, 8)
+- PHP-FPM (7, 8, 8.1)
+- PHP-CLI (7, 8, 8.1)
 - Composer
 - MySQL
 - PHPMyAdmin
@@ -96,6 +96,7 @@ nginx -v # nginx -t
 mysql --version
 php7 --version
 php8 --version
+php81 --version # PHP 8.1
 composer --version
 go version
 rabbitmq --version  # same as rabbitmqctl

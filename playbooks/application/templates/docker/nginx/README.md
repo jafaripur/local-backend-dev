@@ -12,6 +12,8 @@ For running `test.php` in location `/home/test/projects/test.php` use this url:
 http://localhost:8080/test.php
 ```
 
+Default path run with php version is `8.1`.
+
 If you have subfolder under /home/test/projects path you should create config file for that path in `docker_path/nginx/conf.d/subpath/`
 
 This sample serve 3 application in subfolder in this path:
@@ -23,7 +25,7 @@ This sample serve 3 application in subfolder in this path:
 
 ```
 
-sample exist in `docker_file/nginx/conf.d/subpath/crow.conf`
+sample exist in `docker_file/nginx/conf.d/subpath/crow.conf` for `php-8.0`
 
 ```
 
@@ -53,8 +55,14 @@ location ^~ /crow/api/web {
 
 ```
 
-For `PHP-7` use this snippets:
+For `PHP-7.4` use this snippet:
 
 ```
 snippets/php7-fpm.conf
+```
+
+For `PHP-8.1` use this snippet:
+
+```
+snippets/php81-fpm.conf
 ```

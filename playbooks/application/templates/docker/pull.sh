@@ -1,16 +1,22 @@
 #!/bin/bash
 
+{% if docker_php7fpm_image is defined %}
+docker pull {{docker_php7fpm_image}}
+{% endif %}
+{% if docker_php7cli_image is defined %}
+docker pull {{docker_php7cli_image}}
+{% endif %}
 {% if docker_php8fpm_image is defined %}
 docker pull {{docker_php8fpm_image}}
 {% endif %}
 {% if docker_php8cli_image is defined %}
 docker pull {{docker_php8cli_image}}
 {% endif %}
-{% if docker_php7fpm_image is defined %}
-docker pull {{docker_php7fpm_image}}
+{% if docker_php81fpm_image is defined %}
+docker pull {{docker_php81fpm_image}}
 {% endif %}
-{% if docker_php7cli_image is defined %}
-docker pull {{docker_php7cli_image}}
+{% if docker_php81cli_image is defined %}
+docker pull {{docker_php81cli_image}}
 {% endif %}
 {% if docker_nginx_image is defined %}
 docker pull {{docker_nginx_image}}
