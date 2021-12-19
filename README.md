@@ -89,17 +89,19 @@ Docker file available in this variable path `application_working_path` which is 
 This aliases defined in bash configuration for easy access to container.
 
 ```
-mongo --version # Mongosh shell
-postgres --version # psql -U postgres --version
-redis --version # Redis cli
-nginx -v # nginx -t
+mongo --version      # Mongosh shell
+postgres --version   # psql -U postgres --version
+redis --version      # Redis cli
+nginx -v             # nginx -t
 mysql --version
-php7 --version
-php8 --version
-php81 --version # PHP 8.1
-composer --version
+php7 --version       # PHP 7.4
+php8 --version       # PHP 8.0
+php81 --version      # PHP 8.1
+composer7 --version  # PHP 7.4
+composer8 --version  # PHP 8.0
+composer81 --version # PHP 8.1
 go version
-rabbitmq --version  # same as rabbitmqctl
+rabbitmq --version   # same as rabbitmqctl
 node --version
 node npm --version
 node yarn --version

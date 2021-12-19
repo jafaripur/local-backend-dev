@@ -21,6 +21,8 @@ RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 	&& rm -rf /var/tmp/* /tmp/* /var/cache/apk/* \
 	&& mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
 #RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 VOLUME ["/var/www/html", "/usr/local/etc/php/conf.d"]

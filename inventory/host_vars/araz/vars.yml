@@ -45,8 +45,6 @@ docker_php81fpm_container: 'php81-fpm'
 docker_php81fpm_memory: '1GB'
 docker_php81fpm_port: 9000
 
-docker_composer_image: 'composer:latest'
-
 docker_redis_image: 'redis:6.2.6-alpine3.15'
 docker_redis_container: 'redis'
 docker_redis_memory: '256MB'
@@ -124,7 +122,6 @@ available_applications:
   - php8-fpm
   - php81-cli
   - php81-fpm
-  - php-composer
   - php-myadmin
   - php-pgmyadmin
   - postgres
@@ -135,7 +132,9 @@ path_aliases:
   - "alias php8='{{docker_files_path}}/php8-cli/cli.sh'"
   - "alias php81='{{docker_files_path}}/php81-cli/cli.sh'"
   - "alias php7='{{docker_files_path}}/php7-cli/cli.sh'"
-  - "alias composer='{{docker_files_path}}/php-composer/composer.sh'"
+  - "alias composer7='{{docker_files_path}}/php7-cli/composer.sh'"
+  - "alias composer8='{{docker_files_path}}/php8-cli/composer.sh'"
+  - "alias composer81='{{docker_files_path}}/php81-cli/composer.sh'"
   - "alias node='{{docker_files_path}}/node/node.sh'"
   - "alias mongo='{{docker_files_path}}/mongodb/mongodb.sh'"
   - "alias redis='{{docker_files_path}}/redis/redis.sh'"

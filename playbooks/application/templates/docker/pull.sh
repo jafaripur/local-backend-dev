@@ -51,9 +51,6 @@ docker pull {{docker_php_pgmyadmin_image}}
 {% if docker_go_image is defined %}
 docker pull {{docker_go_image}}
 {% endif %}
-{% if docker_composer_image is defined %}
-docker pull {{docker_composer_image}}
-{% endif %}
 {% if docker_mongo_express_image is defined %}
 docker pull {{docker_mongo_express_image}}
 {% endif %}
