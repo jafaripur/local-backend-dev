@@ -4,8 +4,8 @@ docker run -it -d \
            --name {{docker_php81fpm_container}} \
            --network {{docker_network_internal}} \
            -v "{{php_project_path}}:/var/www/html" \
-           -v "{{docker_files_path}}/php81-fpm/config/php-custom.ini:/usr/local/etc/php/conf.d/99-custom.ini" \
-           -v "{{docker_files_path}}/php81-fpm/config/www.conf:/usr/local/etc/php-fpm.d/www.conf" \
+           -v "{{docker_files_path}}/php81-fpm/config/php/:/usr/local/etc/php/conf.d:ro" \
+           -v "{{docker_files_path}}/php81-fpm/config/pools/:/usr/local/etc/php-fpm.d:ro" \
            --workdir /var/www/html \
            --restart unless-stopped \
            --log-driver json-file \
