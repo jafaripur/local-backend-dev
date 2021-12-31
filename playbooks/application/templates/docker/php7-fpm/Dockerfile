@@ -15,7 +15,9 @@ RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 	&& docker-php-source extract \
 	&& docker-php-ext-configure intl && docker-php-ext-install -j$(nproc) intl \
 	&& docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install -j$(nproc) gd \
-	&& docker-php-ext-install bcmath gettext pcntl opcache zip soap \
+	&& docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
+	&& docker-php-ext-configure mysqli --with-mysqli=mysqlnd \
+	&& docker-php-ext-install pdo_mysql bcmath gettext opcache zip soap \
 	&& docker-php-source delete \
 	&& usermod -u 1000 www-data && groupmod -g 1000 www-data \
 	&& apk del shadow bash autoconf gcc binutils binutils-dev g++ libtool make \

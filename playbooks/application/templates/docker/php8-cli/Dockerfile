@@ -15,13 +15,15 @@ RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 	&& docker-php-source extract \
 	&& docker-php-ext-configure intl && docker-php-ext-install -j$(nproc) intl \
 	&& docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install -j$(nproc) gd \
-	&& docker-php-ext-install bcmath gettext pcntl opcache zip soap \
+	&& docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
+	&& docker-php-ext-configure mysqli --with-mysqli=mysqlnd \
+	&& docker-php-ext-install pdo_mysql bcmath gettext pcntl opcache zip soap \
 	&& docker-php-source delete \
 	&& apk del bash autoconf gcc binutils binutils-dev g++ libtool make \
 	&& rm -rf /var/tmp/* /tmp/* /var/cache/apk/* \
 	&& mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
-COPY --from=composer /usr/bin/composer /usr/bin/composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 #RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
