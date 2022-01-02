@@ -8,16 +8,17 @@ RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 	&& apk add --no-cache autoconf gcc binutils binutils-dev shadow \
 	g++ libtool make icu-dev curl-dev openssl-dev libxml2-dev \
 	freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev \
-	libwebp-dev zlib-dev libxpm-dev gettext-dev libzip-dev \
+	libwebp-dev zlib-dev libxpm-dev gettext-dev libzip-dev rabbitmq-c-dev libssh-dev \
 	&& pecl install mongodb \
 	&& pecl install igbinary \
-	&& docker-php-ext-enable mongodb igbinary \
+	&& pecl install amqp \
+	&& docker-php-ext-enable mongodb igbinary amqp \
 	&& docker-php-source extract \
 	&& docker-php-ext-configure intl && docker-php-ext-install -j$(nproc) intl \
 	&& docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install -j$(nproc) gd \
 	&& docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
 	&& docker-php-ext-configure mysqli --with-mysqli=mysqlnd \
-	&& docker-php-ext-install pdo_mysql bcmath gettext opcache zip soap \
+	&& docker-php-ext-install pdo_mysql bcmath gettext opcache zip soap sockets \
 	&& docker-php-source delete \
 	&& usermod -u 1000 www-data && groupmod -g 1000 www-data \
 	&& apk del shadow bash autoconf gcc binutils binutils-dev g++ libtool make \
