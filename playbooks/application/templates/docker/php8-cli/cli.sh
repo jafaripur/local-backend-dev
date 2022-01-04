@@ -2,7 +2,7 @@
 
 projectFolder="$(basename $PWD)"
 
-docker run -it --rm \
+docker run -it --init --rm \
            --network {{docker_network_internal}} \
            -v "${PWD}:/var/www/html/${projectFolder}" \
            -v {{docker_files_path}}/php8-cli/config/php-custom.ini:/usr/local/etc/php/conf.d/99-php-custom.ini:ro \

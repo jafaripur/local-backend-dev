@@ -4,7 +4,7 @@ DEFAULT_PORT="3008"
 DEFAULT_HOST="0.0.0.0"
 
 if [ "$1" = "npm" ]; then
-	docker run --rm --interactive --tty \
+	docker run --rm --init --interactive --tty \
 			-v "${PWD}:/home/node/app" \
 			-v "{{docker_files_path}}/node/data/npm:/.npm" \
 			-v "{{docker_files_path}}/node/data/config:/.config" \
@@ -17,7 +17,7 @@ if [ "$1" = "npm" ]; then
 			--memory {{docker_node_memory}} \
 			{{docker_node_image_build}} "$@"
 elif [ "$1" = "yarn" ]; then
-	docker run --rm --interactive --tty \
+	docker run --rm --init --interactive --tty \
 			-v "${PWD}:/home/node/app" \
 			-v "{{docker_files_path}}/node/data/npm:/.npm" \
 			-v "{{docker_files_path}}/node/data/config:/.config" \
@@ -30,7 +30,7 @@ elif [ "$1" = "yarn" ]; then
 			--memory {{docker_node_memory}} \
 			{{docker_node_image_build}} "$@"
 elif [ "$1" = "gulp" ]; then
-	docker run --rm --interactive --tty \
+	docker run --rm --init --interactive --tty \
 			-v "${PWD}:/home/node/app" \
 			-v "{{docker_files_path}}/node/data/npm:/.npm" \
 			-v "{{docker_files_path}}/node/data/config:/.config" \
@@ -41,7 +41,7 @@ elif [ "$1" = "gulp" ]; then
 			--memory {{docker_node_memory}} \
 			{{docker_node_image_build}} "$@"
 elif [ "$1" = "apidoc" ]; then
-	docker run --rm --interactive --tty \
+	docker run --rm --init --interactive --tty \
 			-v "${PWD}:/home/node/app" \
 			-v "{{docker_files_path}}/node/data/npm:/.npm" \
 			-v "{{docker_files_path}}/node/data/config:/.config" \
@@ -51,7 +51,7 @@ elif [ "$1" = "apidoc" ]; then
 			--memory {{docker_node_memory}} \
 			{{docker_node_image_build}} "$@"
 else
-	docker run --rm --interactive --tty \
+	docker run --rm --init --interactive --tty \
 			-v "${PWD}:/home/node/app" \
 			-v "{{docker_files_path}}/node/data/npm:/.npm" \
 			-v "{{docker_files_path}}/node/data/config:/.config" \

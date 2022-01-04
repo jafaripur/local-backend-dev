@@ -14,7 +14,7 @@ if [ "$1" = "make" ]; then
            {{docker_go_image}} \
            make "$@"
 else
-    docker run -it --rm \
+    docker run -it --init --rm \
            -p 127.0.0.1:$PORT:8080 \
            -v "${PWD}:/usr/src/myapp" \
            --workdir /usr/src/myapp \
