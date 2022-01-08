@@ -1,14 +1,12 @@
 FROM {{docker_php8cli_image}}
 
-LABEL maintainer="mjafaripr@yahoo.com"
-
 LABEL org.label-schema.name="araz/{{docker_php8cli_image_build}}"
 
 RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 	&& apk add --no-cache autoconf gcc binutils binutils-dev \
 	g++ libtool make icu-dev curl-dev openssl-dev libxml2-dev \
 	freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev \
-	libwebp-dev zlib-dev libxpm-dev gettext-dev libzip-dev rabbitmq-c-dev libssh-dev \
+	libwebp-dev zlib-dev libxpm-dev gettext-dev libzip-dev rabbitmq-c-dev libssh-dev postgresql-dev \
 	&& pecl install mongodb \
 	&& pecl install igbinary \
 	&& pecl install amqp \
@@ -18,7 +16,8 @@ RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 	&& docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install -j$(nproc) gd \
 	&& docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
 	&& docker-php-ext-configure mysqli --with-mysqli=mysqlnd \
-	&& docker-php-ext-install pdo_mysql bcmath gettext pcntl opcache zip soap sockets\
+	&& docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+	&& docker-php-ext-install pdo_mysql bcmath gettext pcntl opcache zip soap sockets pgsql pdo_pgsql \
 	&& docker-php-source delete \
 	&& apk del bash autoconf gcc binutils binutils-dev g++ libtool make \
 	&& rm -rf /var/tmp/* /tmp/* /var/cache/apk/* \
