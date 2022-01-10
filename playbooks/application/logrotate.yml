@@ -12,12 +12,15 @@
    
    - name:  Copy configs
      template: src='{{item.src}}' dest='{{item.dest}}'
+     when: item.enabled
      with_items:
-        - { src: 'templates/logrotate/nginx.j2', dest: '/etc/logrotate.d/nginx'}
-        - { src: 'templates/logrotate/mongodb.j2', dest: '/etc/logrotate.d/mongodb'}
-        - { src: 'templates/logrotate/mysql.j2', dest: '/etc/logrotate.d/mysql'}
-        - { src: 'templates/logrotate/docker-container.j2', dest: '/etc/logrotate.d/docker-container'}
-
+        - { enabled: "'nginx' in in {{available_applications}}", src: 'templates/logrotate/nginx.j2', dest: '/etc/logrotate.d/nginx'}
+        - { enabled: "'mongodb' in in {{available_applications}}", src: 'templates/logrotate/mongodb.j2', dest: '/etc/logrotate.d/mongodb'}
+        - { enabled: "'mysql' in in {{available_applications}}", src: 'templates/logrotate/mysql.j2', dest: '/etc/logrotate.d/mysql'}
+        - { enabled: "'rabbitmq' in in {{available_applications}}", src: 'templates/logrotate/rabbitmq.j2', dest: '/etc/logrotate.d/rabbitmq'}
+        - { enabled: true, src: 'templates/logrotate/docker-container.j2', dest: '/etc/logrotate.d/docker-container'}
+     no_log: true
+     
    - name: restart logrotate
      systemd:
        name: logrotate
