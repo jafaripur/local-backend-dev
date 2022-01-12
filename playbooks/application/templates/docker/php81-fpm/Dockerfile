@@ -10,7 +10,8 @@ RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 	&& pecl install mongodb \
 	&& pecl install igbinary \
 	&& pecl install amqp \
-	&& docker-php-ext-enable mongodb igbinary amqp \
+	&& pecl install msgpack \
+	&& docker-php-ext-enable mongodb igbinary amqp msgpack \
 	&& docker-php-source extract \
 	&& docker-php-ext-configure intl && docker-php-ext-install -j$(nproc) intl \
 	&& docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install -j$(nproc) gd \
