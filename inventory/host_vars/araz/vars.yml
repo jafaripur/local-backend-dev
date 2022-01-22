@@ -49,7 +49,7 @@ docker_redis_image: 'redis:6.2.6-alpine3.15'
 docker_redis_container: 'redis'
 docker_redis_memory: '256MB'
 
-docker_rabbitmq_image: 'rabbitmq:3.9.11-management-alpine'
+docker_rabbitmq_image: 'rabbitmq:3.9.13-management-alpine'
 docker_rabbitmq_container: 'rabbitmq'
 docker_rabbitmq_memory: '1GB'
 
