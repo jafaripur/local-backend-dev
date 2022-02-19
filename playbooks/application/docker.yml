@@ -100,4 +100,10 @@
        path: ~/.bashrc
        line: '{{item}}'
      with_items: "{{path_aliases | default([])}}"
+
+   - name: "Export ENV variable"
+     lineinfile:
+       path: ~/.bashrc
+       line: '{{item}}'
+     with_items: "{{export_env | default([])}}"
 ...
