@@ -85,6 +85,7 @@ docker_php_pgmyadmin_memory: '1GB'
 docker_php_pgmyadmin_external_port: 8091
 
 docker_go_image: 'golang:1.17.7-alpine'
+docker_go_image_build: 'golang-1.17.7-alpine-custom'
 docker_go_container: 'golang'
 docker_go_memory: '1GB'
 
@@ -128,7 +129,7 @@ available_applications:
   - rabbitmq
   - redis
   
-path_aliases:
+bashrc:
   - "alias php8='{{docker_files_path}}/php8-cli/cli.sh'"
   - "alias php81='{{docker_files_path}}/php81-cli/cli.sh'"
   - "alias php7='{{docker_files_path}}/php7-cli/cli.sh'"
@@ -143,7 +144,4 @@ path_aliases:
   - "alias rabbitmq='{{docker_files_path}}/rabbitmq/rabbitmq.sh'"
   - "alias postgres='{{docker_files_path}}/postgres/postgres.sh'"
   - "alias go='{{docker_files_path}}/go/go.sh'"
-
-export_env:
   - "export GOPATH={{docker_files_path}}/go/gopath"
-  

@@ -95,15 +95,9 @@
       - '{{docker_files_path}}/rabbitmq/config/rabbitmq.conf'
      when: "docker_rabbitmq_image is defined"
 
-   - name: "Add alias for docker container"
+   - name: "Add config to ~/.bashrc"
      lineinfile:
        path: ~/.bashrc
        line: '{{item}}'
-     with_items: "{{path_aliases | default([])}}"
-
-   - name: "Export ENV variable"
-     lineinfile:
-       path: ~/.bashrc
-       line: '{{item}}'
-     with_items: "{{export_env | default([])}}"
+     with_items: "{{bashrc | default([])}}"
 ...
