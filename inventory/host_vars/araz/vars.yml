@@ -144,4 +144,4 @@ bashrc:
   - "alias rabbitmq='{{docker_files_path}}/rabbitmq/rabbitmq.sh'"
   - "alias postgres='{{docker_files_path}}/postgres/postgres.sh'"
   - "alias go='{{docker_files_path}}/go/go.sh'"
-  - "export GOPATH={{docker_files_path}}/go/gopath"
+  - "export GOPATH='{{docker_files_path}}/go/gopath'"
