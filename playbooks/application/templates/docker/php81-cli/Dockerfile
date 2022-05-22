@@ -14,7 +14,7 @@ RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 	&& docker-php-ext-enable mongodb igbinary amqp msgpack \
 	&& docker-php-source extract \
 	&& docker-php-ext-configure intl && docker-php-ext-install -j$(nproc) intl \
-	&& docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install -j$(nproc) gd \
+	&& docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp && docker-php-ext-install -j$(nproc) gd \
 	&& docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
 	&& docker-php-ext-configure mysqli --with-mysqli=mysqlnd \
 	&& docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
