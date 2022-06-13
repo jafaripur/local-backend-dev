@@ -4,7 +4,7 @@ LABEL org.label-schema.name="araz/{{docker_php81cli_image_build}}"
 
 RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 	&& apk add --no-cache autoconf gcc binutils binutils-dev \
-	g++ libtool make icu-dev curl-dev openssl-dev libxml2-dev \
+	g++ libtool make icu-dev curl-dev openssl-dev libxml2-dev c-ares-dev \
 	freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev \
 	libwebp-dev zlib-dev libxpm-dev gettext-dev libzip-dev rabbitmq-c-dev libssh-dev postgresql-dev \
 	&& pecl install mongodb \
@@ -19,6 +19,8 @@ RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 	&& docker-php-ext-configure mysqli --with-mysqli=mysqlnd \
 	&& docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
 	&& docker-php-ext-install pdo_mysql bcmath gettext pcntl opcache zip soap sockets pgsql pdo_pgsql \
+	&& pecl install --configureoptions 'enable-sockets="yes" enable-openssl="yes" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="yes" enable-swoole-curl="yes" enable-cares="yes" with-postgres="yes"' openswoole \
+	&& docker-php-ext-enable --ini-name zz-openswoole.ini openswoole \
 	&& docker-php-source delete \
 	&& apk del bash autoconf gcc binutils binutils-dev g++ libtool make \
 	&& rm -rf /var/tmp/* /tmp/* /var/cache/apk/* \
