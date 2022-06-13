@@ -4,7 +4,7 @@ LABEL org.label-schema.name="araz/{{docker_php8cli_image_build}}"
 
 RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 	&& apk add --no-cache autoconf gcc binutils binutils-dev \
-	g++ libtool make icu-dev curl-dev openssl-dev libxml2-dev \
+	g++ libtool make icu-dev curl-dev openssl-dev libxml2-dev c-ares-dev \
 	freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev \
 	libwebp-dev zlib-dev libxpm-dev gettext-dev libzip-dev rabbitmq-c-dev libssh-dev postgresql-dev \
 	&& pecl install mongodb \
