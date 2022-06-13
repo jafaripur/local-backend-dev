@@ -19,7 +19,7 @@ RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 	&& docker-php-ext-configure mysqli --with-mysqli=mysqlnd \
 	&& docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
 	&& docker-php-ext-install pdo_mysql bcmath gettext pcntl opcache zip soap sockets pgsql pdo_pgsql \
-	&& pecl install --configureoptions 'enable-sockets="yes" enable-openssl="yes" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="yes" enable-swoole-curl="yes" enable-cares="yes" with-postgres="yes"' openswoole \
+	&& pecl install --configureoptions 'enable-sockets="yes" enable-openssl="yes" enable-http2="no" enable-mysqlnd="yes" enable-swoole-json="yes" enable-swoole-curl="yes" enable-cares="yes" with-postgres="yes"' openswoole \
 	&& docker-php-ext-enable --ini-name zz-openswoole.ini openswoole \
 	&& docker-php-source delete \
 	&& apk del bash autoconf gcc binutils binutils-dev g++ libtool make \
