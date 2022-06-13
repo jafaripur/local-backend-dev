@@ -11,7 +11,8 @@ RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 	&& pecl install igbinary \
 	&& pecl install amqp \
 	&& pecl install msgpack \
-	&& docker-php-ext-enable mongodb igbinary amqp msgpack \
+	&& pecl install --configureoptions 'enable-sockets="yes" enable-openssl="yes" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="yes" enable-swoole-curl="yes" enable-cares="yes" with-postgres="yes"' openswoole \
+	&& docker-php-ext-enable mongodb igbinary amqp msgpack openswoole \
 	&& docker-php-source extract \
 	&& docker-php-ext-configure intl && docker-php-ext-install -j$(nproc) intl \
 	&& docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp && docker-php-ext-install -j$(nproc) gd \
