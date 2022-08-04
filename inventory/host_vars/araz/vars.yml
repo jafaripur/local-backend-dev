@@ -25,21 +25,21 @@ docker_php7fpm_container: 'php7-fpm'
 docker_php7fpm_memory: '1GB'
 docker_php7fpm_port: 9000
 
-docker_php8cli_image: 'php:8.0.14-cli-alpine'
+docker_php8cli_image: 'php:8.0-cli-alpine'
 docker_php8cli_image_build: 'phpcli-8.0-alpine-custom'
 docker_php8cli_memory: '1GB'
 
-docker_php8fpm_image: 'php:8.0.14-fpm-alpine'
+docker_php8fpm_image: 'php:8.0-fpm-alpine'
 docker_php8fpm_image_build: 'phpfpm-8.0-alpine-custom'
 docker_php8fpm_container: 'php8-fpm'
 docker_php8fpm_memory: '1GB'
 docker_php8fpm_port: 9000
 
-docker_php81cli_image: 'php:8.1.1-cli-alpine'
+docker_php81cli_image: 'php:8.1-cli-alpine'
 docker_php81cli_image_build: 'phpcli-8.1-alpine-custom'
 docker_php81cli_memory: '1GB'
 
-docker_php81fpm_image: 'php:8.1.1-fpm-alpine'
+docker_php81fpm_image: 'php:8.1-fpm-alpine'
 docker_php81fpm_image_build: 'phpfpm-8.1-alpine-custom'
 docker_php81fpm_container: 'php81-fpm'
 docker_php81fpm_memory: '1GB'

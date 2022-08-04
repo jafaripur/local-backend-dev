@@ -7,11 +7,12 @@ RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 	g++ libtool make icu-dev curl-dev openssl-dev libxml2-dev c-ares-dev \
 	freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev \
 	libwebp-dev zlib-dev libxpm-dev gettext-dev libzip-dev rabbitmq-c-dev libssh-dev postgresql-dev \
+	&& pecl install redis \
 	&& pecl install mongodb \
 	&& pecl install igbinary \
 	&& pecl install amqp \
 	&& pecl install msgpack \
-	&& docker-php-ext-enable mongodb igbinary amqp msgpack \
+	&& docker-php-ext-enable redis mongodb igbinary amqp msgpack \
 	&& docker-php-source extract \
 	&& docker-php-ext-configure intl && docker-php-ext-install -j$(nproc) intl \
 	&& docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp && docker-php-ext-install -j$(nproc) gd \
