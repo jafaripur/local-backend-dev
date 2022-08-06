@@ -7,12 +7,11 @@ RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 	g++ libtool make icu-dev curl-dev openssl-dev libxml2-dev \
 	freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev \
 	libwebp-dev zlib-dev libxpm-dev gettext-dev libzip-dev rabbitmq-c-dev libssh-dev postgresql-dev \
-	&& pecl install redis \
 	&& pecl install mongodb \
 	&& pecl install igbinary \
 	&& pecl install amqp \
 	&& pecl install msgpack \
-	&& docker-php-ext-enable redis mongodb igbinary amqp msgpack \
+	&& docker-php-ext-enable mongodb igbinary amqp msgpack \
 	&& docker-php-source extract \
 	&& docker-php-ext-configure intl && docker-php-ext-install -j$(nproc) intl \
 	&& docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp && docker-php-ext-install -j$(nproc) gd \
@@ -20,6 +19,8 @@ RUN apk update && apk upgrade && echo "UTC" > /etc/timezone \
 	&& docker-php-ext-configure mysqli --with-mysqli=mysqlnd \
 	&& docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
 	&& docker-php-ext-install pdo_mysql bcmath gettext opcache zip soap sockets pgsql pdo_pgsql \
+	&& pecl install --configureoptions 'enable-redis-igbinary="yes" enable-redis-lzf="yes" enable-redis-zstd="yes"' redis \
+	&& docker-php-ext-enable --ini-name z-redis.ini redis \
 	&& docker-php-source delete \
 	&& usermod -u 1000 www-data && groupmod -g 1000 www-data \
 	&& apk del shadow bash autoconf gcc binutils binutils-dev g++ libtool make \
