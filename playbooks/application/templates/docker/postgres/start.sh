@@ -11,9 +11,6 @@ docker run -it -d \
            -e "PGDATA=/var/lib/postgresql/data/pgdata" \
            -u $(id -u ${USER}):$(id -g ${USER}) \
            --restart unless-stopped \
-           --log-driver json-file \
-           --log-opt max-size=10m \
-           --log-opt max-file=5 \
            --memory {{docker_postgres_memory}} \
            --cpus 1 \
            {{docker_postgres_image}}

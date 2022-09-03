@@ -15,9 +15,6 @@ docker run -it -d \
            -v "{{docker_files_path}}/mongodb/data/db:/data/db" \
            -v "{{docker_files_path}}/mongodb/data/log:/var/log/mongodb" \
            --restart unless-stopped \
-           --log-driver json-file \
-           --log-opt max-size=10m \
-           --log-opt max-file=5 \
            --ulimit nofile=64000:64000 \
            --ulimit nproc=64000:64000 \
            --memory {{docker_mongodb_memory}} \

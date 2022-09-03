@@ -10,9 +10,6 @@ docker run -it -d \
            -v "{{docker_files_path}}/rabbitmq/data/log:/var/log/rabbitmq" \
            -v "{{docker_files_path}}/rabbitmq/config/enabled_plugins:/etc/rabbitmq/enabled_plugins:ro" \
            --restart unless-stopped \
-           --log-driver json-file \
-           --log-opt max-size=10m \
-           --log-opt max-file=5 \
            --memory {{docker_rabbitmq_memory}} \
            --cpus 1 \
            {{docker_rabbitmq_image}}
