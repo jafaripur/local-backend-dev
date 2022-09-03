@@ -45,11 +45,11 @@ docker_php81fpm_container: 'php81-fpm'
 docker_php81fpm_memory: '1GB'
 docker_php81fpm_port: 9000
 
-docker_redis_image: 'redis:6.2.6-alpine'
+docker_redis_image: 'redis:7-alpine'
 docker_redis_container: 'redis'
 docker_redis_memory: '256MB'
 
-docker_rabbitmq_image: 'rabbitmq:3.9.13-management-alpine'
+docker_rabbitmq_image: 'rabbitmq:3.10-management-alpine'
 docker_rabbitmq_container: 'rabbitmq'
 docker_rabbitmq_memory: '1GB'
 
@@ -57,7 +57,7 @@ docker_node_image: 'node:16-alpine'
 docker_node_image_build: 'node-16-alpine-custom'
 docker_node_memory: '1GB'
 
-docker_elasticsearch_image: 'elasticsearch:7.17.0'
+docker_elasticsearch_image: 'elasticsearch:8.4.0'
 docker_elasticsearch_container: 'elasticsearch'
 docker_elasticsearch_memory: '4GB'
 
@@ -66,16 +66,16 @@ docker_mongodb_container: 'mongodb'
 docker_mongodb_memory: '1GB'
 docker_mongodb_external_port: 27018
 
-docker_mysql_image: 'mysql:8.0.28'
+docker_mysql_image: 'mysql:8.0.30'
 docker_mysql_container: 'mysql'
 docker_mysql_memory: '1GB'
 
-docker_php_myadmin_image: 'phpmyadmin/phpmyadmin:5.1.1'
+docker_php_myadmin_image: 'phpmyadmin/phpmyadmin:5.2'
 docker_php_myadmin_container: 'php-myadmin'
 docker_php_myadmin_memory: '1GB'
 docker_php_myadmin_external_port: 8090
 
-docker_postgres_image: 'postgres:13.6-alpine'
+docker_postgres_image: 'postgres:14.5-alpine'
 docker_postgres_container: 'postgres'
 docker_postgres_memory: '1GB'
 
@@ -84,12 +84,12 @@ docker_php_pgmyadmin_container: 'php-pgmyadmin'
 docker_php_pgmyadmin_memory: '1GB'
 docker_php_pgmyadmin_external_port: 8091
 
-docker_go_image: 'golang:1.17.7-alpine'
-docker_go_image_build: 'golang-1.17.7-alpine-custom'
+docker_go_image: 'golang:1.19-alpine'
+docker_go_image_build: 'golang-1.19-alpine-custom'
 docker_go_container: 'golang'
 docker_go_memory: '1GB'
 
-docker_nginx_image: 'nginx:1.21-alpine'
+docker_nginx_image: 'nginx:1.23-alpine'
 docker_nginx_container: 'nginx'
 docker_nginx_container_memory: '1GB'
 docker_nginx_external_port: 8080
@@ -128,10 +128,12 @@ available_applications:
   - postgres
   - rabbitmq
   - redis
+  - redis-cluster
   
 bashrc:
   - "alias php8='{{docker_files_path}}/php8-cli/cli.sh'"
-  - "alias php81='{{docker_files_path}}/php81-cli/cli.sh'"
+  - "alias php81-port='{{docker_files_path}}/php81-cli/cli.sh'"
+  - "alias php81='{{docker_files_path}}/php81-cli/cli-port.sh'"
   - "alias php7='{{docker_files_path}}/php7-cli/cli.sh'"
   - "alias composer7='{{docker_files_path}}/php7-cli/composer.sh'"
   - "alias composer8='{{docker_files_path}}/php8-cli/composer.sh'"

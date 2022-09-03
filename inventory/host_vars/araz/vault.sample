@@ -1,7 +1,7 @@
 ---
 
-vault_mysql_root_password: '123456'
-vault_mongodb_root_password: '123456'
-vault_redis_password: '123456'
-vault_elasticsearch_password: '123456'
-vault_postgres_password: '123456'
+vault_mysql_root_password: '@123456@'
+vault_mongodb_root_password: '@123456@'
+vault_redis_password: '@123456@'
+vault_elasticsearch_password: '@123456@'
+vault_postgres_password: '@123456@'
