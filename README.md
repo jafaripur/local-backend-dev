@@ -97,6 +97,7 @@ mysql --version
 php7 --version       # PHP 7.4
 php8 --version       # PHP 8.0
 php81 --version      # PHP 8.1
+php81-port app.php   # PHP 8.1 Start with port
 composer7 --version  # PHP 7.4
 composer8 --version  # PHP 8.0
 composer81 --version # PHP 8.1
