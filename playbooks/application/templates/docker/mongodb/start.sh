@@ -14,6 +14,9 @@ docker run -it -d \
            -v "{{docker_files_path}}/mongodb/config/keyfile:/data/keyfile:ro" \
            -v "{{docker_files_path}}/mongodb/data/db:/data/db" \
            -v "{{docker_files_path}}/mongodb/data/log:/var/log/mongodb" \
+           -v "{{docker_files_path}}/mongodb/data/backup:/data/backup" \
+           -e "MONGO_INITDB_ROOT_USERNAME=root" \
+           -e "MONGO_INITDB_ROOT_PASSWORD={{vault_mongodb_root_password}}" \
            --restart unless-stopped \
            --ulimit nofile=64000:64000 \
            --ulimit nproc=64000:64000 \
